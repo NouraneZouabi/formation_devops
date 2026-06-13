@@ -1,4 +1,4 @@
-name: cicd
+name: cicd spring angular
 
 on:
   push:

@@ -18,3 +18,7 @@ jobs:
             chmod +x mvnw
             ./mvnw clean package
             ./mvnw clean verify 
+        - name: Build and Push Backend Docker image 
+          run: |
+            docker build -t nouran10/spring-app .
+            docker push nouran10/spring-app .

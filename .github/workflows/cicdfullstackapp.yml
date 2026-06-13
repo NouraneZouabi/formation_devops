@@ -9,5 +9,5 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-        -   name: checkout code source 
-            uses: actions/checkout@v6
+        -  name: checkout code source 
+           uses: actions/checkout@v6

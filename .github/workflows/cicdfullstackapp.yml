@@ -20,5 +20,5 @@ jobs:
             ./mvnw clean verify 
         - name: Build and Push Backend Docker image 
           run: |
-            docker build -t nouran10/spring-app .
-            docker push nouran10/spring-app .
+            docker build -t nouran10/spring-app springboot/app
+            docker push nouran10/spring-app 

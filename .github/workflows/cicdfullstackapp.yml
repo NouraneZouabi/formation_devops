@@ -11,3 +11,10 @@ jobs:
         steps:
         -  name: checkout code source 
            uses: actions/checkout@v6
+
+        - name: Build and test Spring boot
+          run: |
+            cd springboot/app
+            chmod +x mvnw
+            ./mvnw clean package
+            ./mvnw clean verify  

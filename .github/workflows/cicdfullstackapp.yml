@@ -32,3 +32,8 @@ jobs:
           run: |
             docker build -t ${{ vars.DOCKERHUB_USERNAME }}/spring-app springboot/app
             docker push ${{ vars.DOCKERHUB_USERNAME }}/spring-app 
+
+        - name: Build and Push Frontend Docker image 
+          run: |
+            docker build -t ${{ vars.DOCKERHUB_USERNAME }}/angular-app angular-app
+            docker push ${{ vars.DOCKERHUB_USERNAME }}/angular-app 

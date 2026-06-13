@@ -37,3 +37,8 @@ jobs:
           run: |
             docker build -t ${{ vars.DOCKERHUB_USERNAME }}/angular-app angular-app
             docker push ${{ vars.DOCKERHUB_USERNAME }}/angular-app 
+
+        - name: Run with docker compose 
+          run: |
+            docker compose up -d 
+            docker compose ps -a

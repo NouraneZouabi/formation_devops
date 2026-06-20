@@ -12,7 +12,7 @@ pipeline {
         }
         stage ("Clone repo"){
             steps {
-                sh "git clone https://github.com/NouraneZouabi/app.git"
+                sh "git clone https://github.com/NouraneZouabi/formation_devops.git"
             }
         }
         stage ("Generate frontend image") {

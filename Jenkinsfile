@@ -24,12 +24,12 @@ pipeline {
         withCredentials([
           usernamePassword(
             credentialsId: 'docker-hub-creds',
-            usernameVariable: 'DOCKRTHUB_USERNAME',
+            usernameVariable: 'DOCKERHUB_USERNAME',
             passwordVariable: 'DOCKERHUB_TOKEN'
           )
         ]) {
-          sh '''echo $DOCKRTHUB_TOKEN | docker login \
-              -u $DOCKRTHUB_USERNAME \
+          sh '''echo $DOCKERHUB_TOKEN | docker login \
+              -u $DOCKERHUB_USERNAME \
               --password-stdin '''
         }
       }

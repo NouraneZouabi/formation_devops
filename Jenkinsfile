@@ -19,6 +19,22 @@ pipeline {
       }
     }
 
+    stage("Login to docker hub"){
+      steps{
+        withCredentials([
+          usernamePassword(
+            credentialsId: 'docker-hub-creds',
+            usernameVariable: 'DOCKRTHUB_USERNAME',
+            passwordVariable: 'DOCKERHUB_TOKEN'
+          )
+        ]) {
+          sh '''echo $DOCKRTHUB_TOKEN | docker login \
+              -u $DOCKRTHUB_USERNAME \
+              --password-stdin '''
+        }
+      }
+    }
+
     stage("Build backend image") {
       steps{
         dir("formation_devops/springboot/app"){

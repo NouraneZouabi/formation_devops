@@ -18,8 +18,8 @@ pipeline {
         stage ("Generate frontend image") {
             steps {
                  dir("app/angular-app"){
-                    sh "docker build -t nouran10/myapp-frontend . --no-cache"
-		                sh "docker push nouran10/myapp-frontend"
+                    sh "docker build -t nouran10/angular-app . --no-cache"
+		                sh "docker push nouran10/angular-app"
                 }                
             }
         }
@@ -27,8 +27,8 @@ pipeline {
               steps {
                    dir("app/springboot/app"){
                       sh "mvn clean install"
-                      sh "docker build -t nouran10/myapp-backend . --no-cache"
-		                  sh "docker push nouran10/myapp-backend"
+                      sh "docker build -t nouran10/spring-backend . --no-cache"
+		                  sh "docker push nouran10/spring-backend"
                   }                
               }
           }

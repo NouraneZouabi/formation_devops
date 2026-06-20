@@ -58,7 +58,6 @@ pipeline {
       steps{
         dir("formation_devops"){
           sh "docker compose down --volumes"
-          sh "docker compose pull"
           sh "docker compose up -d "
         }
       }

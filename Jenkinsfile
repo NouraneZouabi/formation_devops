@@ -27,17 +27,18 @@ pipeline {
               steps {
                    dir("formation_devops/springboot/app"){
                       sh "mvn clean install"
-                      sh "docker build -t nouran10/spring-backend . --no-cache"
-		                  sh "docker push nouran10/spring-backend"
+                      sh "docker build -t nouran10/spring-app . --no-cache"
+		                  sh "docker push nouran10/spring-app"
                   }                
               }
           }
+
         stage ("Run docker compose") {
             steps {
                  dir("formation_devops"){
             		    sh "docker compose down --volumes" 
             		    sh "docker compose pull"
-                    sh "sudo docker compose up -d"
+                    	sh "docker compose up -d"
                 }                
             }
         }

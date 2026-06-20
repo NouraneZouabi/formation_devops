@@ -34,7 +34,7 @@ pipeline {
           }
         stage ("Run docker compose") {
             steps {
-                 dir("app"){
+                 dir("formation_devops"){
             		    sh "docker compose down --volumes" 
             		    sh "docker compose pull"
                     sh "sudo docker compose up -d"

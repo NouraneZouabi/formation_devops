@@ -52,7 +52,16 @@ pipeline {
           sh "docker push nouran10/angular-app"
         }
       }
-      
+    }
+
+    stage("docker compose for production"){
+      steps{
+        dir("formation_devops"){
+          sh "docker compose down --volumes"
+          sh "docker compose pull"
+          sh "docker compose up -d "
+        }
+      }
     }
     
   }

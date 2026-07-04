@@ -41,4 +41,4 @@ jobs:
         - name: Run with docker compose 
           run: |
             docker compose up -d 
-            docker compose ps -a
+            docker compose ps -a 

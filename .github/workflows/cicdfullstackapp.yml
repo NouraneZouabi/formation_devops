@@ -2,7 +2,7 @@ name: cicd spring angular
 
 on:
   push:
-    branches: seance2
+    branches: master
 
 jobs:
     build-and-deploy:

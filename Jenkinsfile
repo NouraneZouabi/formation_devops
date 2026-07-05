@@ -43,10 +43,13 @@ pipeline {
                     -Dsonar.projectKey=deploy-app ^ 
                     -Dsonar.host.url=http://18.206.77.148:9000 ^ 
                     -Dsonar.login=sqp_907df0ab4d086f1841e39d8e19dd54c2dfb606a4
+                    -Dsonar.ws.timeout=300
                 """ 
           } 
       } 
     } 
+
+
     stage("Build backend image") {
       steps{
         dir("formation_devops/springboot/app"){

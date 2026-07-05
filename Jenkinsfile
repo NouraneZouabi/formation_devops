@@ -44,6 +44,19 @@ pipeline {
         }
       }
     }
+    stage("test quality gate  SONARQUBE") {
+      steps{
+        dir("formation_devops/springboot/app"){
+          bat ' set "MAVEN_USER_HOME=C:\\Jenkins\\.m2" && mvnw.cmd clean install'
+          bat """
+            mvn clean verify sonar:sonar \
+              -Dsonar.projectKey=formation_devops \
+              -Dsonar.host.url=http://18.206.77.148:9000 \
+              -Dsonar.login=sqp_f509c16308685e95d8a0e9a982d7c13b08804ffe
+          """
+        }
+      }
+    }
 
     stage("Build Frontend image"){
       steps{

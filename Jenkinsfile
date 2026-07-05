@@ -54,11 +54,10 @@ pipeline {
       }
     }
 
-    stage("docker compose for production"){
+    stage("Production with k8s"){
       steps{
-        dir("formation_devops"){
-          bat "docker compose down --volumes"
-          bat "docker compose up -d "
+        dir("formation_devops/"){
+          bat "kubectl apply -f k8s "
         }
       }
     }

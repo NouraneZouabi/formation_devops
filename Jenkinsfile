@@ -38,7 +38,6 @@ pipeline {
     stage("sonar test") { 
       steps { 
         dir("formation_devops/springboot/app") { 
-                bat "set MAVEN_USER_HOME=C:\\Jenkins\\.m2&& mvnw.cmd clean install" 
                 bat """ 
                    mvnw.cmd clean verify sonar:sonar ^ 
                     -Dsonar.projectKey=deploy-app ^ 

@@ -57,9 +57,9 @@ pipeline {
     stage("Production with k8s"){
       steps{
         dir("formation_devops/"){
-          withKubeConfig([credentialsId:'kubeconfigformationdevops',serverUrl:'http://18.206.77.148:6443']){
+          withKubeConfig([credentialsId:'kubeconfigformationdevops',serverUrl:'https://18.206.77.148:6443']){
             bat "kubectl config view"
-            bat "kubectl get nodes --v=8"
+            bat "kubectl get nodes -v=9"
             bat "kubectl apply -f k8s "
           }
         }

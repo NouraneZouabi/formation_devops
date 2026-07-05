@@ -39,6 +39,7 @@ pipeline {
       steps { 
         dir("formation_devops/springboot/app") { 
                 bat """ 
+                   set SONAR_HOST_URL=http://18.206.77.148:9000
                    mvnw.cmd clean verify sonar:sonar ^ 
                     -Dsonar.projectKey=deploy-app ^ 
                     -Dsonar.host.url=http://18.206.77.148:9000 ^ 

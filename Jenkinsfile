@@ -54,13 +54,16 @@ pipeline {
       }
     }
 
-    stage("docker compose for production"){
-      steps{
-        dir("formation_devops"){
-          bat "docker compose down --volumes"
-          bat "docker compose up -d "
-        }
-      }
+    stage("Deploy") { 
+      steps { 
+        dir('formation_devops/') { 
+          withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://54.196.35.185:6443']) { 
+                        bat 'kubectl config view' 
+                        bat 'kubectl get nodes' 
+                        bat 'kubectl apply -f k8s' 
+                    } 
+                } 
+        } 
     }
     
   }

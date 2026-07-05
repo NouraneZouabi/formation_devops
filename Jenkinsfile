@@ -40,12 +40,10 @@ pipeline {
         dir("formation_devops/springboot/app") { 
                 bat 'set "MAVEN_USER_HOME=C:\\Jenkins\\.m2" && mvnw.cmd clean install'
                 bat """ 
-                   set SONAR_HOST_URL=http://18.206.77.148:9000
-                   mvnw.cmd clean verify sonar:sonar ^ 
-                    -Dsonar.projectKey=deploy-app ^ 
-                    -Dsonar.host.url=http://18.206.77.148:9000 ^ 
-                    -Dsonar.login=sqp_907df0ab4d086f1841e39d8e19dd54c2dfb606a4
-                    -Dsonar.ws.timeout=300
+                  mvn clean verify sonar:sonar \
+                    -Dsonar.projectKey=deploy-app \
+                    -Dsonar.host.url=http://18.206.77.148:9000 \
+                    -Dsonar.login=sqp_3a4041e189f012e93bb56b102d868cb4d69a8e08
                 """ 
           } 
       } 

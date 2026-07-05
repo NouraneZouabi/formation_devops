@@ -15,7 +15,7 @@ pipeline {
     
     stage("clone repo"){
       steps {
-        bat "git clone https://github.com/NouraneZouabi/formation_devops.git"
+        sh "git clone https://github.com/NouraneZouabi/formation_devops.git"
       }
     }
 
@@ -28,34 +28,19 @@ pipeline {
             passwordVariable: 'DOCKERHUB_TOKEN'
           )
         ]) {
-          bat """
-            echo %DOCKERHUB_TOKEN% | docker login -u %DOCKERHUB_USERNAME% --password-stdin
-          """
+          sh '''echo $DOCKERHUB_TOKEN | docker login \
+              -u $DOCKERHUB_USERNAME \
+              --password-stdin '''
         }
       }
     }
 
-    stage("sonar test") { 
-      steps { 
-        dir("formation_devops/springboot/app") { 
-                bat 'set "MAVEN_USER_HOME=C:\\Jenkins\\.m2" && mvnw.cmd clean install'
-                bat """ 
-                  mvn clean verify sonar:sonar \
-                    -Dsonar.projectKey=deploy-app \
-                    -Dsonar.host.url=http://18.206.77.148:9000 \
-                    -Dsonar.login=sqp_3a4041e189f012e93bb56b102d868cb4d69a8e08
-                """ 
-          } 
-      } 
-    } 
-
-
     stage("Build backend image") {
       steps{
         dir("formation_devops/springboot/app"){
-          bat "mvn clean package"
-          bat "docker build -t nouran10/spring-app . --no-cache"
-          bat "docker push nouran10/spring-app"
+          sh "mvn clean package"
+          sh "docker build -t nouran10/spring-app . --no-cache"
+          sh "docker push nouran10/spring-app"
         }
       }
     }
@@ -63,22 +48,19 @@ pipeline {
     stage("Build Frontend image"){
       steps{
         dir("formation_devops/angular-app"){
-          bat "docker build -t nouran10/angular-app . --no-cache"
-          bat "docker push nouran10/angular-app"
+          sh "docker build -t nouran10/angular-app . --no-cache"
+          sh "docker push nouran10/angular-app"
         }
       }
     }
 
-    stage("Deploy") { 
-      steps { 
-        dir('formation_devops/') { 
-          withKubeConfig([credentialsId: 'kubeconfigqantra', serverUrl: 'https://18.206.77.148:6443']) { 
-                        bat 'kubectl config view' 
-                        bat 'kubectl get nodes' 
-                        bat 'kubectl apply -f k8s' 
-                    } 
-                } 
-        } 
+    stage("docker compose for production"){
+      steps{
+        dir("formation_devops"){
+          sh "docker compose down --volumes"
+          sh "docker compose up -d "
+        }
+      }
     }
     
   }

@@ -78,6 +78,14 @@ pipeline {
         }
       }
     }
+    stage('Deploy with Ansible') {
+      steps {
+          bat '''
+            ssh -o StrictHostKeyChecking=no -i C:\\ProgramData\\Jenkins\\.jenkins\\masteer.pem ubuntu@18.206.77.148 "cd /home/ubuntu/formation_devops/ansible && ansible-playbook -i inventory.ini playbook.yaml"
+          '''
+            }
+        }
+
     
   }
   

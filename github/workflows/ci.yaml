@@ -1,0 +1,6 @@
+name: integration contenu spring angular avec github action
+
+on:
+  push: 
+    branches: main 
+

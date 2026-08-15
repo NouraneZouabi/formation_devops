@@ -22,3 +22,8 @@ jobs:
       run : | 
         docker build -t nouran10/angular-app angular-app
         docker push nouran10/angular-app 
+
+    - name : build de la partie backend
+      run: |
+        docker build -t nouran10/springboot-backend springboot/app
+        docker push nouran10/springboot-backend

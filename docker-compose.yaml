@@ -1,0 +1,33 @@
+services :
+  angular-app:
+    image: angular-app
+    container_name: frontend_container
+    ports:
+    - "0.0.0.0:4200:80"
+  spring-boot-app:
+    image: spring-app
+    container_name: backend_container 
+    ports:
+      - "0.0.0.0:8081:8081"
+    environment:
+    - SPRING_DATASOURCE_URL="jdbc:mysql://192.168.187.19:3306/demo"
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=root
+    - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+    - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    - SPRING_MVC_CORS_MAPPING=/**
+    - SPRING_MVC_CORS_ALLOWED_METHODS=GET,POST,PUT,DELETE
+    - SPRING_MVC_CORS_ALLOWED_HEADERS=*
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_container
+    ports: 
+    - "0.0.0.0:3306:3306"
+    environment:
+      MYSQL_DATABASE: "demo"
+      MYSQL_ROOT_USERNAME: "root"
+      MYSQL_ROOT_PASSWORD: "root"
+    volumes: 
+    - demo:/var/lib/mysql 
+volumes: 
+  demo:

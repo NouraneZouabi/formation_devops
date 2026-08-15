@@ -18,12 +18,19 @@ jobs:
         username: ${{ vars.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: build de la partie frontend
+    - name: build and push de la partie frontend
       run : | 
         docker build -t nouran10/angular-app angular-app
         docker push nouran10/angular-app 
 
-    - name : build de la partie backend
+    - name: creation du fichier .jar
+      run: |
+        cd springboot/app
+        chmod +x mvnw 
+        ./mvnw clean verify
+        ./mvnw clean package 
+        
+    - name : build and push de la partie backend
       run: |
         docker build -t nouran10/springboot-backend springboot/app
         docker push nouran10/springboot-backend

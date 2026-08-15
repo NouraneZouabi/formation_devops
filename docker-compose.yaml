@@ -1,11 +1,11 @@
 services :
   angular-app:
-    image: angular-app
+    image: nouran10/angular-app
     container_name: frontend_container
     ports:
     - "0.0.0.0:4200:80"
   spring-boot-app:
-    image: spring-app
+    image: nouran10/springboot-backend 
     container_name: backend_container 
     ports:
       - "0.0.0.0:8081:8081"

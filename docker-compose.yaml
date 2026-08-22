@@ -5,7 +5,7 @@ services :
     ports:
     - "0.0.0.0:4200:80"
   spring-boot-app:
-    image: nouran10/springboot-app
+    image: nouran10/spring-app
     container_name: backend_container 
     ports:
       - "0.0.0.0:8081:8081"

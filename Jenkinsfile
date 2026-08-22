@@ -15,6 +15,22 @@ pipeline {
       }
     }
 
+    stage ("Login to docker"){
+      steps {
+        withCredentials([
+          usernamePassword (
+            credentialsId: "docker-hub-creds",
+            usernameVariable: "DOCKERHUB_USERNAME",
+            passwordVariable: "DOCKERHUB_TOKEN"
+            )
+        )] {
+          sh ''' echo $DOCKERHUB_TOKEN | docker login  \ 
+                  -u $DOCKERHUB_USERNAME \
+                  --password-stdin
+        }
+      }
+    }
+    
     stage ("Génération  de l'image frontend "){
       steps {
         dir("formation_devops/angular-app"){

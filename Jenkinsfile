@@ -19,6 +19,7 @@ pipeline {
       steps {
         dir("formation_devops/angular-app"){
           sh "docker build -t nouran10/angular-app . --no-cache"
+          sh "docker push nouran10/angular-app"
         }
       }
     }

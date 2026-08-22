@@ -47,6 +47,16 @@ pipeline {
         }
       }
     }
+
+    stage ("Run docker compose "){
+      steps {
+        dir("formation_devops"){
+          sh "docker compose down --volumes"
+          sh "docker compose pull "
+          sh "docker compose  -f docker-compose.yaml up -d  "
+        }
+      }
+    }
     
   }
 }

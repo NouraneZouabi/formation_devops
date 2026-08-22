@@ -28,6 +28,16 @@ pipeline {
         }
       }
     }
+
+    stage ("Génération  de l'image backend "){
+      steps {
+        dir("formation_devops/springboot/app"){
+          sh "mvn clean install"
+          sh "docker build -t nouran10/spring-app . --no-cache"
+          sh "docker push nouran10/spring-app"
+        }
+      }
+    }
     
     stage ("Génération  de l'image frontend "){
       steps {

@@ -51,12 +51,15 @@ pipeline {
       }
     }
 
-    stage ("Run docker compose "){
+    stage ("Deploy kubernetes  "){
       steps {
         dir("formation_devops"){
-          bat "docker compose down --volumes"
-          bat "docker compose pull "
-          bat "docker compose  -f docker-compose.yaml up -d  "
+          withKubeConfig ([ credentialsId: 'kubeconfig', serverUrl: 'https://44.196.97.113:6443'])
+          {
+            bat 'kubectl config view'
+            bat 'kubectl apply -f k8s/'
+            bat 'kubectl apply -f ingress.yaml'
+          }
         }
       }
     }

@@ -11,7 +11,7 @@ pipeline {
     
     stage ("clonage du code "){
       steps {
-        sh "git clone https://github.com/NouraneZouabi/formation_devops.git"
+        bat "git clone https://github.com/NouraneZouabi/formation_devops.git"
       }
     }
 
@@ -24,7 +24,7 @@ pipeline {
             passwordVariable: "DOCKERHUB_TOKEN"
             )
         ]) {
-          sh """ echo "$DOCKERHUB_TOKEN" | docker login  -u "$DOCKERHUB_USERNAME" --password-stdin  """
+          bat """ echo "$DOCKERHUB_TOKEN" | docker login  -u "$DOCKERHUB_USERNAME" --password-stdin  """
         }
       }
     }
@@ -32,9 +32,9 @@ pipeline {
     stage ("Génération  de l'image backend "){
       steps {
         dir("formation_devops/springboot/app"){
-          sh "mvn clean install"
-          sh "docker build -t nouran10/spring-app . --no-cache"
-          sh "docker push nouran10/spring-app"
+          bat "mvn clean install"
+          bat "docker build -t nouran10/spring-app . --no-cache"
+          bat "docker push nouran10/spring-app"
         }
       }
     }
@@ -42,8 +42,8 @@ pipeline {
     stage ("Génération  de l'image frontend "){
       steps {
         dir("formation_devops/angular-app"){
-          sh "docker build -t nouran10/angular-app . --no-cache"
-          sh "docker push nouran10/angular-app"
+          bat "docker build -t nouran10/angular-app . --no-cache"
+          bat "docker push nouran10/angular-app"
         }
       }
     }
@@ -51,9 +51,9 @@ pipeline {
     stage ("Run docker compose "){
       steps {
         dir("formation_devops"){
-          sh "docker compose down --volumes"
-          sh "docker compose pull "
-          sh "docker compose  -f docker-compose.yaml up -d  "
+          bat "docker compose down --volumes"
+          bat "docker compose pull "
+          bat "docker compose  -f docker-compose.yaml up -d  "
         }
       }
     }

@@ -54,7 +54,7 @@ pipeline {
     stage ("Deploy kubernetes  "){
       steps {
         dir("formation_devops"){
-          withKubeConfig ([ credentialsId: 'kubeconfig', serverUrl: 'https://44.196.97.113:6443'])
+          withKubeConfig ([ credentialsId: 'cred-config-kubernetes', serverUrl: 'https://44.196.97.113:6443'])
           {
             bat 'kubectl config view'
             bat 'kubectl apply -f k8s/'

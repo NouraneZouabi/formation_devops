@@ -47,7 +47,7 @@ pipeline {
         dir("formation_devops/springboot/app"){
           bat 'set "MAVEN_USER_HOME=C:\\Jenkins\\.m2" && mvnw.cmd clean install'
           bat """
-            mvn clean verify sonar:sonar ^
+            mvnw clean verify sonar:sonar ^
               -Dsonar.projectKey=formation_devops ^
               -Dsonar.host.url=http://44.196.97.113:9000 ^
               -Dsonar.login=sqp_86ccbac4e9d7aa822c354071982d2beea86b32a0

@@ -61,6 +61,7 @@ pipeline {
         }
       }
     }
+    }
     
     stage ("Génération  de l'image frontend "){
       steps {

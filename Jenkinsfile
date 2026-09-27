@@ -70,20 +70,6 @@ pipeline {
           bat "docker push nouran10/angular-app"
         }
       }
-    }
-
-    stage ("Deploy kubernetes  "){
-      steps {
-        dir("formation_devops"){
-          withKubeConfig ([ credentialsId: 'cred-config-kubernetes', serverUrl: 'https://44.196.97.113:6443'])
-          {
-            bat 'kubectl config view'
-            bat 'kubectl apply -f k8s/'
-            bat 'kubectl apply -f ingress.yaml'
-          }
-        }
-      }
-    }
-    
+    }    
   }
 }

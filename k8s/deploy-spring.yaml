@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: nouran10/spring-app
+        image: nouran10/spring-app:v2
         ports:
         - containerPort: 8081
         env:
